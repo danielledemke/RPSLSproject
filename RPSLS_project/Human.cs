@@ -6,7 +6,29 @@ using System.Threading.Tasks;
 
 namespace RPSLS_project
 {
-    class Human
+    class Human : Player
     {
+        //member variables
+
+
+        //constructor
+        public Human()
+        {
+            SetUserName();
+        }
+
+        //member methods
+        public override void ChooseGesture()
+        {
+            Console.WriteLine("Please choose gesture: \n");
+            gesture = Console.ReadLine();
+        }
+
+        public override void SetUserName()
+        {
+            Console.WriteLine("Please enter name for this player: \n");
+            name = Console.ReadLine();
+        }
+
     }
 }

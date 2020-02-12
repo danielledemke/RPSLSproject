@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace RPSLS_project
 {
-    class Player
+    public abstract class Player
     {
+        //member variables
+        public string name = "";
+        public int score;
+        public string gesture;
+
+
+        //constructor
+
+
+
+        //member methods
+        public abstract void ChooseGesture();
+
+        public abstract void SetUserName();
+        
+
+       
     }
 }
