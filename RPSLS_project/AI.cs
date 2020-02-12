@@ -9,8 +9,8 @@ namespace RPSLS_project
     class AI : Player
     {
         //member variables
-        int nameNumber;
-        Random randomNumber;
+        static int nameNumber;  //got help from Brett!
+        public Random randomNumber;
         
         
         //constructor

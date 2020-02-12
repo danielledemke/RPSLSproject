@@ -20,7 +20,7 @@ namespace RPSLS_project
         //member methods
         public override void ChooseGesture()
         {
-            Console.WriteLine("Please choose gesture: \n");
+            Console.WriteLine(name + ", please choose gesture: \n");
             gesture = Console.ReadLine();
         }
 
