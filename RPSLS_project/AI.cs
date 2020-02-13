@@ -14,9 +14,9 @@ namespace RPSLS_project
         
         
         //constructor
-        public AI()
+        public AI(Random randomNumber)
         {
-            randomNumber = new Random();
+            this.randomNumber = randomNumber;
             nameNumber++;
             SetUserName();
         }

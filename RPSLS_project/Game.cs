@@ -9,16 +9,16 @@ namespace RPSLS_project
     class Game
     {
         //member variables
-       public Player playerOne;
-       public Player playerTwo;
-       public List<string> gestures;
-       
-
+        public Player playerOne;
+        public Player playerTwo;
+        public List<string> gestures;
+        public Random randomNumber;
+        public string numberPlayers;
 
         //constructor
         public Game()
         {
-            
+            randomNumber = new Random();
         }
 
 
@@ -26,50 +26,67 @@ namespace RPSLS_project
         public void RunGame()
         {
             DisplayGameRules();
-            string numberPlayers = GetNumberOfPlayers();
+            numberPlayers = GetNumberOfPlayers();
             SetPlayers(numberPlayers);
-            while(playerOne.score < 2 && playerTwo.score < 2)
+
+            while (playerOne.score < 2 && playerTwo.score < 2)
             { RunFullGameRound(); }
-            
             CheckGameWinner();
+            AskPlayAgain();
         }
 
         public void RunFullGameRound()
         {
+            Console.ReadLine();
             DisplayGestureList();
             playerOne.ChooseGesture();
+            Console.ReadLine();
             playerTwo.ChooseGesture();
+
             CompareGestures();
         }
         public string GetNumberOfPlayers()
         {
             Console.WriteLine("Please choose the number of human players in the game: \n");
-            string numberPlayers = Console.ReadLine();
-            return numberPlayers;
-            
+            string userInput = Console.ReadLine();
+            return userInput;
+
         }
         public void SetPlayers(string numberPlayers)
         {
-            if (numberPlayers == "1")
+
+            bool isValid = true;
+            while (isValid)
             {
-                playerOne = new Human();
-                playerTwo = new AI();
+                if (numberPlayers == "1")
+                {
+                    playerOne = new Human();
+                    playerTwo = new AI(randomNumber);
+                    Console.WriteLine(playerOne.name + ", you are now playing against the computer!");
+                    isValid = false;
+                }
+                else if (numberPlayers == "2")
+                {
+                    playerOne = new Human();
+                    playerTwo = new Human();
+                    isValid = false;
+                }
+                else if (numberPlayers == "0")
+                {
+                    playerOne = new AI(randomNumber);
+                    playerTwo = new AI(randomNumber);
+                    Console.WriteLine("You can now watch the computer players!");
+                    isValid = false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number of players");
+                    numberPlayers = GetNumberOfPlayers();
+                }
             }
-            else if(numberPlayers == "2")
-            {
-                playerOne = new Human();
-                playerTwo = new Human();
-            }
-            else if(numberPlayers == "0")
-            {
-                playerOne = new AI();
-                playerTwo = new AI();
-            }
-            else
-            {
-                Console.WriteLine("Invalid number of players");
-                GetNumberOfPlayers();
-            }
+
+
+
         }
         public void DisplayGestureList()
         {
@@ -90,18 +107,19 @@ namespace RPSLS_project
         {
             Console.WriteLine("Welcome to Rock, Paper, Scissors, Lizard, Spock! \n The game is played just like a standard game of Rock, Paper, Scissors except with additional gesture choices.");
             Console.WriteLine("To win the game, you must win the best of 3 rounds. The gesture results are:");
-            Console.WriteLine("Rock crushes Scissors, and crushes Lizard");
-            Console.WriteLine("Scissors cuts Paper, and decapitates Lizard");
-            Console.WriteLine("Paper covers Rock, and disproves Spock");
-            Console.WriteLine("Lizard poisons Spock, and eats Paper");
-            Console.WriteLine("Spock vaporizes Rock, and smashes Scissors");
-            Console.WriteLine("Press enter when ready to begin!");
+            Console.WriteLine(" * Rock crushes Scissors, and crushes Lizard");
+            Console.WriteLine(" * Scissors cuts Paper, and decapitates Lizard");
+            Console.WriteLine(" * Paper covers Rock, and disproves Spock");
+            Console.WriteLine(" * Lizard poisons Spock, and eats Paper");
+            Console.WriteLine(" * Spock vaporizes Rock, and smashes Scissors");
+            Console.WriteLine("Press ENTER key when ready to begin!");
             Console.ReadLine();
         }
         public void CompareGestures()
         {
             Console.WriteLine(playerOne.name + " uses " + playerOne.gesture);
             Console.WriteLine(playerTwo.name + " uses " + playerTwo.gesture);
+            Console.ReadLine();
 
             if (playerOne.gesture == playerTwo.gesture)
             {
@@ -166,19 +184,31 @@ namespace RPSLS_project
                 playerTwo.score++;
             }
 
-            
+
         }
         public void CheckGameWinner()
         {
-            if(playerOne.score >= 2)
+            if (playerOne.score >= 2)
             {
-                Console.WriteLine(playerOne.name + " has a total score of " + playerOne.score + " rounds wins and wins the game!");
+                Console.WriteLine(playerOne.name + " has a total score of " + playerOne.score + " round wins and wins the game!");
             }
-            else if(playerTwo.score >= 2)
+            else if (playerTwo.score >= 2)
             {
-                Console.WriteLine(playerTwo.name + " has a total score of " + playerTwo.score + " rounds wins and wins the game!");
+                Console.WriteLine(playerTwo.name + " has a total score of " + playerTwo.score + " round wins and wins the game!");
             }
-           
+
+        }
+
+        public void AskPlayAgain()
+        {
+            Console.WriteLine("Would you like to play another game?");
+            string userResponse = Console.ReadLine();
+
+            if (userResponse == "yes" || userResponse == "Yes" || userResponse == "Y")
+            {
+                RunGame();
+            }
+            
         }
 
         
