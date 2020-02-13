@@ -20,8 +20,11 @@ namespace RPSLS_project
         //member methods
         public override void ChooseGesture()
         {
+            
             Console.WriteLine(name + ", please choose gesture: \n");
+            Console.ForegroundColor = ConsoleColor.Black;
             gesture = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
             bool isValid = true;
             while (isValid)
             {
@@ -29,6 +32,7 @@ namespace RPSLS_project
                 {
                     case "Rock":
                     case "rock":
+
                         gesture = "Rock";
                         isValid = false;
                         break;
@@ -59,6 +63,7 @@ namespace RPSLS_project
                         break;
 
                 }
+                
             }
 
         }

@@ -9,7 +9,7 @@ namespace RPSLS_project
     class Game
     {
         //member variables
-        public Player playerOne;
+        public Player playerOne;    
         public Player playerTwo;
         public List<string> gestures;
         public Random randomNumber;
@@ -41,6 +41,7 @@ namespace RPSLS_project
             DisplayGestureList();
             playerOne.ChooseGesture();
             Console.ReadLine();
+            DisplayGestureList();
             playerTwo.ChooseGesture();
 
             CompareGestures();
