@@ -22,31 +22,43 @@ namespace RPSLS_project
         {
             Console.WriteLine(name + ", please choose gesture: \n");
             gesture = Console.ReadLine();
-
-            switch (gesture)
+            bool isValid = true;
+            while (isValid)
             {
-                case "Rock":
-                case "rock":
-                    gesture = "Rock";
-                    break;
-                case "Paper":
-                case "paper":
-                    gesture = "Paper";
-                    break;
-                case "scissors":
-                case "Scissors":
-                    gesture = "Scissors";
-                    break;
-                case "Lizard":
-                case "lizard":
-                    gesture = "Lizard";
-                    break;
-                case "Spock":
-                case "spock":
-                default:
-                    Console.WriteLine("Not a valid entry");
-                    break;
-                    
+                switch (gesture)
+                {
+                    case "Rock":
+                    case "rock":
+                        gesture = "Rock";
+                        isValid = false;
+                        break;
+                    case "Paper":
+                    case "paper":
+                        gesture = "Paper";
+                        isValid = false;
+                        break;
+                    case "scissors":
+                    case "Scissors":
+                        gesture = "Scissors";
+                        isValid = false;
+                        break;
+                    case "Lizard":
+                    case "lizard":
+                        gesture = "Lizard";
+                        isValid = false;
+                        break;
+                    case "Spock":
+                    case "spock":
+                        gesture = "Spock";
+                        isValid = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Not a valid entry");
+                        ChooseGesture();
+                        break;
+
+                }
             }
 
         }
